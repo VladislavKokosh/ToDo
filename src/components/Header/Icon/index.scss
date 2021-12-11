@@ -1,0 +1,21 @@
+@import '../../../assets/colors';
+
+.icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 24px;
+  &__img {
+    width: 100%;
+    height: 18px;
+  }
+  &__title {
+    margin-top: 2px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 6px;
+    line-height: 7px;
+    color: $text;
+  }
+}

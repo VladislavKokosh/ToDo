@@ -1,0 +1,26 @@
+@import '../../../assets/colors';
+
+.input-task {
+  display: flex;
+  & > *:not(:last-child) {
+    margin-right: 8px;
+  }
+  input {
+    border: 1px solid $border;
+    box-sizing: border-box;
+    border-radius: 4px;
+    width: 1170px;
+    padding: 12px !important;
+    &:focus-visible {
+      outline: none;
+    }
+  }
+
+  &__button {
+    padding: 11px;
+    background-color: $primary;
+    color: $white;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+}
