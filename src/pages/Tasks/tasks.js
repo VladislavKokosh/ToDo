@@ -2,7 +2,6 @@ import {LeftBar} from "../../components/LeftBar/leftBar";
 import './index.scss'
 import {InputTask} from "../../components/Tasks";
 import { Tasks as TasksModule}  from '../../modules/Tasks/tasks'
-import {Task} from "../../components/Tasks/Task/task";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import {getTasks} from "../../store/actions/tasks";
@@ -17,6 +16,7 @@ const Tasks = () => {
 
   useEffect(() => {
     dispatch(getTasks())
+    // eslint-disable-next-line
   }, [])
 
   return(
