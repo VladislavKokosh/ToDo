@@ -1,15 +1,38 @@
 import {LeftBar} from "../../components/LeftBar/leftBar";
 import './index.scss'
 import {InputTask} from "../../components/Tasks";
+import { Tasks as TasksModule}  from '../../modules/Tasks/tasks'
+import {Task} from "../../components/Tasks/Task/task";
+import {useDispatch, useSelector} from "react-redux";
+import {useEffect} from "react";
+import {getTasks} from "../../store/actions/tasks";
+import {getCompletedTasksSelector, getProcessTasksSelector, getTasksSelector} from "../../store/selectors/tasks";
+
 
 const Tasks = () => {
+  const dispatch = useDispatch()
+  const tasks = useSelector(getTasksSelector)
+  const processTasks = useSelector(getProcessTasksSelector)
+  const completedTasks = useSelector(getCompletedTasksSelector)
+
+  useEffect(() => {
+    dispatch(getTasks())
+  }, [])
+
   return(
-    <div className='tasks-container'>
+    <div className='page'>
       <LeftBar/>
-      <div style={{width: '100%', padding: '24px'}}>
-        <InputTask/>
+      <div className='page__tasks-container'>
+        <div className='page__tasks-container__left'>
+          <InputTask tag={{theme: 'primary', text: `Total: ${tasks?.length}`}}/>
+          <TasksModule tasks={processTasks} tag={{theme: 'blue', text: `To do: ${processTasks?.length}`}}/>
+        </div>
+        <div className='page__tasks-container__right'>
+          <TasksModule tasks={completedTasks} tag={{theme: 'green', text: `Completed: ${completedTasks?.length}`}}/>
+        </div>
       </div>
     </div>
+
   )
 }
 

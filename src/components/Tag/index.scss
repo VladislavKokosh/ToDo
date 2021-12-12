@@ -1,0 +1,19 @@
+@import '../../assets/colors';
+
+.tag {
+  display: inline-block;
+  border-radius: 4px;
+  padding: 4px;
+  &__primary {
+    background-color: #FEF6FF;
+    color: $primary;
+  }
+  &__blue {
+    background-color: #F6FCFF;
+    color: #0D9CC9;
+  }
+  &__green {
+    background-color: #F6FFF9;
+    color: #0DC958;
+  }
+}

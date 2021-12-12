@@ -1,0 +1,18 @@
+@import '../../../../assets/colors';
+$img: url('../../../../assets/icons/checkbox.svg');
+
+.checkbox {
+  background: #FFFFFF;
+  border: 1px solid #ECECEC;
+  box-sizing: border-box;
+  border-radius: 4px;
+  min-width: 16px;
+  min-height: 16px;
+  max-width: 16px;
+  max-height: 16px;
+  cursor: pointer;
+  &__active {
+    background: $img no-repeat center center, $primary;
+    border-color: $primary;
+  }
+}

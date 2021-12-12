@@ -1,18 +1,19 @@
 @import '../../../assets/colors';
 
 .input-task {
-  display: flex;
-  & > *:not(:last-child) {
-    margin-right: 8px;
+  & > * {
+    margin-bottom: 12px;
   }
-  input {
-    border: 1px solid $border;
-    box-sizing: border-box;
-    border-radius: 4px;
-    width: 1170px;
-    padding: 12px !important;
-    &:focus-visible {
-      outline: none;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  align-items: flex-start;
+  &__up {
+    width: 100%;
+    display: flex;
+    & > *:not(:last-child) {
+      margin-right: 8px;
     }
   }
 
@@ -22,5 +23,16 @@
     color: $white;
     border-radius: 4px;
     cursor: pointer;
+  }
+
+  input {
+    width: 100%;
+    border: 1px solid $border;
+    box-sizing: border-box;
+    border-radius: 4px;
+    padding: 12px !important;
+    &:focus-visible {
+      outline: none;
+    }
   }
 }
