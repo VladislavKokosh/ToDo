@@ -11,6 +11,7 @@ $img: url('../../../../assets/icons/checkbox.svg');
   max-width: 16px;
   max-height: 16px;
   cursor: pointer;
+
   &__active {
     background: $img no-repeat center center, $primary;
     border-color: $primary;

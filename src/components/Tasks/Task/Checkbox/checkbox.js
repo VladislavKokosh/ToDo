@@ -1,8 +1,7 @@
-import './index.scss'
 import {useState} from "react";
 import {useDispatch} from "react-redux";
 import {checkedTask} from "../../../../store/actions/tasks";
-
+import './index.scss'
 
 const Checkbox = ({ task }) => {
   const dispatch = useDispatch()

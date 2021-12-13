@@ -2,13 +2,15 @@ import {
   CHECKED_TASK_FAILURE,
   CHECKED_TASK_SUCCESS,
   DELETE_TASK_FAILURE,
-  DELETE_TASK_SUCCESS, EDIT_TASK_FAILURE, EDIT_TASK_SUCCESS,
+  DELETE_TASK_SUCCESS,
+  EDIT_TASK_FAILURE,
+  EDIT_TASK_SUCCESS,
   GET_TASKS_FAILURE,
   GET_TASKS_SUCCESS,
   POST_TASK_FAILURE,
-  POST_TASK_SUCCESS, SELECT_TASK
-} from "../types/tasks";
-
+  POST_TASK_SUCCESS,
+  SELECT_TASK
+} from "../types/tasks"
 
 const initState = {
   tasks: [],
@@ -33,7 +35,7 @@ const tasksReducer = (state = initState, action) => {
     case DELETE_TASK_FAILURE:
       return {...state, error: action.payload}
     case CHECKED_TASK_SUCCESS:
-      const filterTasks = state.tasks.filter(task => task.id != action.payload.id)
+      const filterTasks = state.tasks.filter(task => task.id !== action.payload.id)
       const editTask = {...action.payload, completed: !action.payload.completed}
       return { ...state, tasks: [...filterTasks, editTask]}
     case CHECKED_TASK_FAILURE:

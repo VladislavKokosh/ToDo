@@ -1,4 +1,4 @@
-import {HIDE_LOADER, SHOW_LOADER} from "../types/loader";
+import { HIDE_LOADER, SHOW_LOADER } from "../types/loader"
 
 const initState = {
   isLoading: true

@@ -6,10 +6,12 @@
   padding: 16px 27px 16px 16px;
   background-color: $white;
   filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.1));
+
   &__info {
     display: flex;
     align-items: center;
   }
+
   &__title {
     margin-left: 42px;
     font-style: normal;

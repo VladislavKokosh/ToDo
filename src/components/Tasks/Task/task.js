@@ -1,9 +1,9 @@
-import {Checkbox} from "./Checkbox/checkbox";
-import editIcon from '../../../assets/icons/edit.svg';
-import deleteIcon from '../../../assets/icons/delete.svg';
-import './index.scss'
 import {useDispatch} from "react-redux";
 import {deleteTask, selectTask} from "../../../store/actions/tasks";
+import editIcon from '../../../assets/icons/edit.svg';
+import deleteIcon from '../../../assets/icons/delete.svg';
+import {Checkbox} from "./Checkbox";
+import './index.scss'
 
 const Task = ({task}) => {
   const dispatch = useDispatch()

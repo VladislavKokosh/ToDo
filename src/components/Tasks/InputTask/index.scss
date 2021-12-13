@@ -1,14 +1,16 @@
 @import '../../../assets/colors';
 
 .input-task {
-  & > * {
-    margin-bottom: 12px;
-  }
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   align-content: flex-start;
   align-items: flex-start;
+
+  & > * {
+    margin-bottom: 12px;
+  }
+
   &__up {
     width: 100%;
     display: flex;
@@ -31,6 +33,7 @@
     box-sizing: border-box;
     border-radius: 4px;
     padding: 12px !important;
+
     &:focus-visible {
       outline: none;
     }

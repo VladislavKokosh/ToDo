@@ -1,5 +1,5 @@
 import axios from "axios";
-import {put, call, select} from 'redux-saga/effects'
+import { put, call, select } from 'redux-saga/effects'
 
 import {
   hideLoader,
@@ -18,8 +18,8 @@ import {
   postTaskFailure,
   postTaskSuccess
 } from "../actions/tasks";
-import {getTaskById} from "../selectors/tasks";
-import {toast} from "react-toastify";
+import { getTaskById } from "../selectors/tasks";
+import { toast } from "react-toastify";
 
 const getError = (e) => toast.error(e.message , {
   position: "top-center",

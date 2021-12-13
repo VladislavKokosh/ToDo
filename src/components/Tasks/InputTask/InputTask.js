@@ -1,10 +1,10 @@
-import './index.scss'
-import {Tag} from "../../Tag/tag";
 import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
+import { toast } from 'react-toastify';
 import {editTask, postTask, selectTask} from "../../../store/actions/tasks";
-import { ToastContainer, toast } from 'react-toastify';
 import {selectTaskSelector} from "../../../store/selectors/tasks";
+import {Tag} from "../../Tag";
+import './index.scss'
 
 const InputTask = ({tag}) => {
   const dispatch = useDispatch()

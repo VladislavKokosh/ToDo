@@ -12,11 +12,14 @@
     display: flex;
     align-items: center;
     padding-right: 6px;
+
     & > *:not(:last-child) {
       margin-right: 8px;
     }
+
     &-title {
       color: $text;
+
       &-done {
         color: $grey;
         text-decoration-line: line-through;
@@ -27,9 +30,11 @@
   &__buttons {
     display: flex;
     align-items: center;
+
     & > *:not(:last-child) {
       margin-right: 13px;
     }
+
     &-button {
       cursor: pointer;
     }
