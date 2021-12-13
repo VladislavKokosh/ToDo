@@ -41,6 +41,7 @@ function* postTask(newPost) {
 
 function* deleteTask(id) {
   try{
+    // eslint-disable-next-line
     const request = yield call(() => axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`))
     yield put(deleteTaskSuccess(id.payload))
   }

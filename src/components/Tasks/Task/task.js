@@ -14,7 +14,7 @@ const Task = ({task}) => {
   return(
     <div className='task'>
       <div className='task__content'>
-        <Checkbox completed={task.completed}/>
+        <Checkbox task={task}/>
         <div
           className={task.completed ? 'task__content-title-done' : 'task__content-title'}
         >
