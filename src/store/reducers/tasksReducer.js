@@ -21,12 +21,12 @@ const tasksReducer = (state = initState, action) => {
       return {...state, error: action.payload}
     case POST_TASK_SUCCESS:
       const newTasks = [...state.tasks, action.payload]
-      return { ...state.tasks, tasks: newTasks}
+      return { ...state, tasks: newTasks}
     case POST_TASK_FAILURE:
       return {...state, error: action.payload}
     case DELETE_TASK_SUCCESS:
       const filterTask = state.tasks.filter(task => task.id !== action.payload)
-      return { ...state.tasks, tasks: filterTask}
+      return { ...state, tasks: filterTask}
     case DELETE_TASK_FAILURE:
       return {...state, error: action.payload}
     default: return state

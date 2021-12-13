@@ -2,7 +2,14 @@ import {
   GET_TASKS,
   GET_TASKS_SUCCESS,
   GET_TASKS_FAILURE,
-  POST_TASK_SUCCESS, POST_TASK, POST_TASK_FAILURE, DELETE_TASK, DELETE_TASK_SUCCESS, DELETE_TASK_FAILURE
+  POST_TASK_SUCCESS,
+  POST_TASK,
+  POST_TASK_FAILURE,
+  DELETE_TASK,
+  DELETE_TASK_SUCCESS,
+  DELETE_TASK_FAILURE,
+  CHECKED_TASK,
+  CHECKED_TASK_SUCCESS, CHECKED_TASK_FAILURE
 } from "../types/tasks";
 
 const getTasks = () => (
@@ -70,6 +77,28 @@ const deleteTaskFailure = (error) => (
   }
 )
 
+const checkedTask = (task) => (
+  {
+    type: CHECKED_TASK,
+    payload: task
+  }
+)
+
+const checkedTaskSuccess = (completed) => (
+  {
+    type: CHECKED_TASK_SUCCESS,
+    payload: completed
+  }
+)
+
+
+const checkedTaskFailure = (error) => (
+  {
+    type: CHECKED_TASK_FAILURE,
+    payload: error
+  }
+)
+
 
 export {
   getTasks,
@@ -80,5 +109,8 @@ export {
   postTaskFailure,
   deleteTask,
   deleteTaskSuccess,
-  deleteTaskFailure
+  deleteTaskFailure,
+  checkedTask,
+  checkedTaskSuccess,
+  checkedTaskFailure
 }
