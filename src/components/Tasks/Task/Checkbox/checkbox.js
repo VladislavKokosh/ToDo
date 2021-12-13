@@ -1,8 +1,8 @@
 import './index.scss'
 import {useState} from "react";
 
-const Checkbox = () => {
-  const [checked, setChecked] = useState(true)
+const Checkbox = ({ completed }) => {
+  const [checked, setChecked] = useState(completed)
   return(
     <div
       className={`checkbox ${checked ? 'checkbox__active' : ''}`}

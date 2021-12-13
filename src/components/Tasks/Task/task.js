@@ -7,8 +7,12 @@ const Task = ({task}) => {
   return(
     <div className='task'>
       <div className='task__content'>
-        <Checkbox/>
-        <div>{task.title}</div>
+        <Checkbox completed={task.completed}/>
+        <div
+          className={task.completed ? 'task__content-title-done' : 'task__content-title'}
+        >
+          {task.title}
+        </div>
       </div>
       <div className='task__buttons'>
         <img src={editIcon} alt=''/>
