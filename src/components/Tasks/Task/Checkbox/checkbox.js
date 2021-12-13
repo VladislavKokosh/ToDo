@@ -9,12 +9,7 @@ const Checkbox = ({ task }) => {
   const [checked, setChecked] = useState(task.completed)
   const onChange = () => {
     setChecked(!checked)
-    const editTask = {
-      id: task.id,
-      completed: !checked
-    }
-    console.log(editTask)
-    dispatch(checkedTask(editTask))
+    dispatch(checkedTask(task))
   }
   return(
     <div

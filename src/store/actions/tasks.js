@@ -9,7 +9,7 @@ import {
   DELETE_TASK_SUCCESS,
   DELETE_TASK_FAILURE,
   CHECKED_TASK,
-  CHECKED_TASK_SUCCESS, CHECKED_TASK_FAILURE
+  CHECKED_TASK_SUCCESS, CHECKED_TASK_FAILURE, SELECT_TASK, EDIT_TASK, EDIT_TASK_SUCCESS, EDIT_TASK_FAILURE
 } from "../types/tasks";
 
 const getTasks = () => (
@@ -77,17 +77,17 @@ const deleteTaskFailure = (error) => (
   }
 )
 
-const checkedTask = (task) => (
+const checkedTask = (id) => (
   {
     type: CHECKED_TASK,
-    payload: task
+    payload: id
   }
 )
 
-const checkedTaskSuccess = (completed) => (
+const checkedTaskSuccess = (task) => (
   {
     type: CHECKED_TASK_SUCCESS,
-    payload: completed
+    payload: task
   }
 )
 
@@ -95,6 +95,35 @@ const checkedTaskSuccess = (completed) => (
 const checkedTaskFailure = (error) => (
   {
     type: CHECKED_TASK_FAILURE,
+    payload: error
+  }
+)
+
+const selectTask = (task) => (
+  {
+    type: SELECT_TASK,
+    payload: task
+  }
+)
+
+const editTask = (task) => (
+  {
+    type: EDIT_TASK,
+    payload: task
+  }
+)
+
+const editTaskSuccess = (task) => (
+  {
+    type: EDIT_TASK_SUCCESS,
+    payload: task
+  }
+)
+
+
+const editTaskFailure = (error) => (
+  {
+    type: EDIT_TASK_FAILURE,
     payload: error
   }
 )
@@ -112,5 +141,9 @@ export {
   deleteTaskFailure,
   checkedTask,
   checkedTaskSuccess,
-  checkedTaskFailure
+  checkedTaskFailure,
+  selectTask,
+  editTask,
+  editTaskSuccess,
+  editTaskFailure
 }

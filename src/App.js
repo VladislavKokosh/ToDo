@@ -1,12 +1,15 @@
 import { Header } from './components'
 import { Tasks } from "./pages"
 import './App.scss'
+import 'react-toastify/dist/ReactToastify.css';
+import {ToastContainer} from "react-toastify";
 
 const App = () => {
   return (
     <div className="App">
       <Header/>
       <Tasks/>
+      <ToastContainer autoClose={3000}/>
     </div>
   );
 }

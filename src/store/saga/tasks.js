@@ -1,16 +1,43 @@
 import axios from "axios";
-import {put, call} from 'redux-saga/effects'
+import {put, call, select} from 'redux-saga/effects'
 
-import {hideLoader, showLoader} from "../actions/loader";
 import {
+  hideLoader,
+  showLoader
+} from "../actions/loader";
+
+import {
+  checkedTaskFailure,
+  checkedTaskSuccess,
   deleteTaskFailure,
   deleteTaskSuccess,
+  editTaskFailure,
+  editTaskSuccess,
   getTasksFailure,
   getTasksSuccess,
   postTaskFailure,
   postTaskSuccess
 } from "../actions/tasks";
+import {getTaskById} from "../selectors/tasks";
+import {toast} from "react-toastify";
 
+const getError = (e) => toast.error(e.message , {
+  position: "top-center",
+  autoClose: 3000,
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: false,
+  draggable: false
+});
+
+const getSuccess = (title) => toast.success(title, {
+  position: "top-center",
+  autoClose: 3000,
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: false,
+  draggable: false
+});
 
 function* getTasks() {
   try {
@@ -18,58 +45,65 @@ function* getTasks() {
     const { data } = yield call(() => axios.get('https://jsonplaceholder.typicode.com/todos?_limit=10'))
     yield put(getTasksSuccess(data))
   }
-  catch (error) {
-    yield put(getTasksFailure(error))
+  catch (e) {
+    yield put(getTasksFailure(e))
+    getError(e)
+
   }
   finally {
     yield put(hideLoader())
   }
 }
 
-function* postTask(newPost) {
+function* postTask({ payload }) {
   try{
-    const request = yield call(() => axios.post('https://jsonplaceholder.typicode.com/todos', newPost.payload))
-    yield put(postTaskSuccess(request.data))
+    yield call(() => axios.post('https://jsonplaceholder.typicode.com/todos', payload))
+    yield put(postTaskSuccess(payload))
+    getSuccess('Задача успешно добавлена!')
   }
   catch (e) {
     yield put(postTaskFailure(e))
-  }
-  finally {
-
+    getError(e)
   }
 }
 
-function* deleteTask(id) {
+function* deleteTask({ payload }) {
   try{
-    // eslint-disable-next-line
-    const request = yield call(() => axios.delete(`https://jsonplaceholder.typicode.com/todos/${id.payload}`))
-    yield put(deleteTaskSuccess(id.payload))
+    yield call(() => axios.delete(`https://jsonplaceholder.typicode.com/todos/${payload}`))
+    yield put(deleteTaskSuccess(payload))
+    getSuccess('Задача успешно удалена!')
   }
   catch (e) {
     yield put(deleteTaskFailure(e))
-  }
-  finally {
-
+    getError(e)
   }
 }
 
-function* checkedTask(task) {
+function* checkedTask({ payload }) {
   try{
-    console.log(task.payload)
-    const id = task.payload.id
-    const completed = { completed: task.payload.completed}
-    console.log(id)
-    console.log(completed)
-    // eslint-disable-next-line
-    const request = yield call(() => axios.patch(`https://jsonplaceholder.typicode.com/todos/${id}`, completed))
-
+    const task = yield select(getTaskById(payload.id))
+    yield call(() => axios.patch(`https://jsonplaceholder.typicode.com/todos/${payload.id}`, {completed: !task.completed}))
+    yield put(checkedTaskSuccess(payload))
+    getSuccess(task.completed ? 'Задача удачно перенесена в невыполненные!' : 'Задача выполнена!')
   }
   catch (e) {
-    console.log(e)
-  }
-  finally {
-
+    checkedTaskFailure(e)
+    getError(e)
   }
 }
 
-export { getTasks, postTask, deleteTask, checkedTask }
+function* editTask({ payload }) {
+  try{
+    yield call(() => axios.patch(`https://jsonplaceholder.typicode.com/todos/${payload.id}`, {title: payload.title}))
+    yield put(editTaskSuccess(payload))
+    getSuccess('Задача отредактирована и сохранена!')
+  }
+  catch (e) {
+    editTaskFailure(e)
+    getError(e)
+  }
+}
+
+
+
+export { getTasks, postTask, deleteTask, checkedTask, editTask }

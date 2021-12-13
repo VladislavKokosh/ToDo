@@ -3,22 +3,18 @@ import editIcon from '../../../assets/icons/edit.svg';
 import deleteIcon from '../../../assets/icons/delete.svg';
 import './index.scss'
 import {useDispatch} from "react-redux";
-import {deleteTask} from "../../../store/actions/tasks";
-import {ToastContainer, toast} from "react-toastify";
+import {deleteTask, selectTask} from "../../../store/actions/tasks";
 
 const Task = ({task}) => {
   const dispatch = useDispatch()
-  const onChange = (id) => {
-    dispatch(deleteTask(id))
-    toast.success('Задача удалена!', {
-      position: "top-center",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
+
+  const onDelete = () => {
+    dispatch(deleteTask(task.id))
+    dispatch(selectTask(null))
+  }
+
+  const onChange = () => {
+    dispatch(selectTask(task))
   }
 
   return(
@@ -32,9 +28,8 @@ const Task = ({task}) => {
         </div>
       </div>
       <div className='task__buttons'>
-        <img src={editIcon} alt=''/>
-        <img src={deleteIcon} alt='' onClick={() => onChange(task.id)}/>
-        <ToastContainer autoClose={3000}/>
+        <img className='task__buttons-button' src={editIcon} alt='' onClick={onChange}/>
+        <img className='task__buttons-button' src={deleteIcon} alt='' onClick={onDelete}/>
       </div>
     </div>
   )

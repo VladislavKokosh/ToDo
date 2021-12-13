@@ -1,5 +1,5 @@
-import {Tag} from "../../components/Tag/tag";
-import {Task} from "../../components/Tasks/Task/task";
+import { Tag } from '../../components'
+import { Task } from '../../components';
 import './index.scss'
 
 const Tasks = ({tag, tasks}) => {

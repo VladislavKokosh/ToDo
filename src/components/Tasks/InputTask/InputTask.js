@@ -1,32 +1,30 @@
 import './index.scss'
 import {Tag} from "../../Tag/tag";
-import {useState} from "react";
-import {useDispatch} from "react-redux";
-import {postTask} from "../../../store/actions/tasks";
+import {useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {editTask, postTask, selectTask} from "../../../store/actions/tasks";
 import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import {selectTaskSelector} from "../../../store/selectors/tasks";
 
 const InputTask = ({tag}) => {
   const dispatch = useDispatch()
-  const [task, setTask] = useState(null)
+  const [task, setTask] = useState('')
+  const selectedTask = useSelector(selectTaskSelector)
 
-  const onChange = () => {
+  useEffect(() => {
+    !!selectedTask ? setTask(selectedTask.title) : setTask('')
+  }, [selectedTask])
+
+  const onAdd = () => {
     if(task) {
       const newTask = {
+        userId: new Date(),
+        id: new Date(),
         title: task,
         completed: false
       }
       dispatch(postTask(newTask))
       setTask('')
-      toast.success('Задача добавлена!', {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
     }
     else{
       toast.warn('Заполните поле для названия задачи!', {
@@ -41,6 +39,26 @@ const InputTask = ({tag}) => {
     }
   }
 
+  const onEnter = (e) => {
+    if (e.keyCode === 13) {
+      onClick()
+    }
+  }
+
+  const onEdit = () => {
+    const editTaskObj = {...selectedTask, title: task}
+    dispatch(editTask(editTaskObj))
+    dispatch(selectTask(null))
+    setTask('')
+  }
+
+  const onClick = () => {
+    !!selectedTask ? onEdit() : onAdd()
+  }
+
+
+  const hasButtonName = !!selectedTask ? 'Save' : 'Add'
+
   return(
     <div className='input-task'>
       <div className='input-task__up'>
@@ -49,14 +67,14 @@ const InputTask = ({tag}) => {
           placeholder='+ Add a task, press Enter to save'
           value={task}
           onChange={e => setTask(e.target.value)}
+          onKeyDown={e => onEnter(e)}
         />
         <div
           className='input-task__button'
-          onClick={() => onChange()}
+          onClick={() => onClick()}
         >
-          Add
+          {hasButtonName}
         </div>
-        <ToastContainer autoClose={3000}/>
       </div>
       <Tag text={tag.text} theme={tag.theme}/>
     </div>

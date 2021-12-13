@@ -1,6 +1,7 @@
 .page {
   display: flex;
   min-height: calc(100vh - 64px);
+  transition: 1s;
   &__tasks-container {
     @media(max-width: 1200px){
       flex-direction: column;
