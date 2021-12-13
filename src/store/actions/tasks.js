@@ -2,7 +2,7 @@ import {
   GET_TASKS,
   GET_TASKS_SUCCESS,
   GET_TASKS_FAILURE,
-  POST_TASK_SUCCESS, POST_TASK, POST_TASK_FAILURE
+  POST_TASK_SUCCESS, POST_TASK, POST_TASK_FAILURE, DELETE_TASK, DELETE_TASK_SUCCESS, DELETE_TASK_FAILURE
 } from "../types/tasks";
 
 const getTasks = () => (
@@ -48,6 +48,28 @@ const postTaskFailure = (error) => (
   }
 )
 
+const deleteTask = (id) => (
+  {
+    type: DELETE_TASK,
+    payload: id
+  }
+)
+
+const deleteTaskSuccess = (id) => (
+  {
+    type: DELETE_TASK_SUCCESS,
+    payload: id
+  }
+)
+
+
+const deleteTaskFailure = (error) => (
+  {
+    type: DELETE_TASK_FAILURE,
+    payload: error
+  }
+)
+
 
 export {
   getTasks,
@@ -55,5 +77,8 @@ export {
   getTasksFailure,
   postTask,
   postTaskSuccess,
-  postTaskFailure
+  postTaskFailure,
+  deleteTask,
+  deleteTaskSuccess,
+  deleteTaskFailure
 }

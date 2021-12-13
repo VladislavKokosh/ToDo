@@ -2,8 +2,15 @@ import {Checkbox} from "./Checkbox/checkbox";
 import editIcon from '../../../assets/icons/edit.svg';
 import deleteIcon from '../../../assets/icons/delete.svg';
 import './index.scss'
+import {useDispatch} from "react-redux";
+import {deleteTask} from "../../../store/actions/tasks";
 
 const Task = ({task}) => {
+  const dispatch = useDispatch()
+  const onChange = (id) => {
+    dispatch(deleteTask(id))
+  }
+
   return(
     <div className='task'>
       <div className='task__content'>
@@ -16,7 +23,7 @@ const Task = ({task}) => {
       </div>
       <div className='task__buttons'>
         <img src={editIcon} alt=''/>
-        <img src={deleteIcon} alt=''/>
+        <img src={deleteIcon} alt='' onClick={() => onChange(task.id)}/>
       </div>
     </div>
   )

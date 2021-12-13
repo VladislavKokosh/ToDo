@@ -2,7 +2,14 @@ import axios from "axios";
 import {put, call} from 'redux-saga/effects'
 
 import {hideLoader, showLoader} from "../actions/loader";
-import {getTasksFailure, getTasksSuccess, postTaskSuccess } from "../actions/tasks";
+import {
+  deleteTaskFailure,
+  deleteTaskSuccess,
+  getTasksFailure,
+  getTasksSuccess,
+  postTaskFailure,
+  postTaskSuccess
+} from "../actions/tasks";
 
 
 function* getTasks() {
@@ -25,11 +32,24 @@ function* postTask(newPost) {
     yield put(postTaskSuccess(request.data))
   }
   catch (e) {
-    yield put(getTasksFailure(e))
+    yield put(postTaskFailure(e))
   }
   finally {
 
   }
 }
 
-export { getTasks, postTask }
+function* deleteTask(id) {
+  try{
+    const request = yield call(() => axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`))
+    yield put(deleteTaskSuccess(id.payload))
+  }
+  catch (e) {
+    yield put(deleteTaskFailure(e))
+  }
+  finally {
+
+  }
+}
+
+export { getTasks, postTask, deleteTask }
