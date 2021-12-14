@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useEffect, useState, useRef} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import { toast } from 'react-toastify';
 import {editTask, postTask, selectTask} from "../../../store/actions/tasks";
@@ -9,10 +9,12 @@ import './index.scss'
 const InputTask = ({tag}) => {
   const dispatch = useDispatch()
   const [task, setTask] = useState('')
+  const focusInput = useRef(null);
   const selectedTask = useSelector(selectTaskSelector)
 
   useEffect(() => {
     !!selectedTask ? setTask(selectedTask.title) : setTask('')
+    focusInput.current.focus();
   }, [selectedTask])
 
   const onAdd = () => {
@@ -68,6 +70,7 @@ const InputTask = ({tag}) => {
           value={task}
           onChange={e => setTask(e.target.value)}
           onKeyDown={e => onEnter(e)}
+          ref={focusInput}
         />
         <div
           className='input-task__button'
